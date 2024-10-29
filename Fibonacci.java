@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Fib {  // Class to calculate and display Fibonacci series
+public class Fib { // Class to calculate and display Fibonacci series
 
     public static void main(String[] args) {
         // Create a Scanner object to take input from the user
