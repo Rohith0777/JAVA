@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner; 
 
 public class Fib { // Class to calculate and display Fibonacci series
 
