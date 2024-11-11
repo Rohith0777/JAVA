@@ -1,59 +1,38 @@
-import java.util.Scanner; // Import the Scanner class for user input
-
-// Main class demonstrating method overloading for different shapes
-class overloading {
-    // Nested class for Triangle with a method to calculate its area
-    public static class Triangle {
-        // Method to calculate the area of a triangle given its base and height
-        public static double calcArea(float base, float height) {
-            return base * height * 0.5; // Formula: (base * height) / 2
+import java.util.*;
+class methodoverloading{
+    public static class Rectangle{
+        public static int area(int l,int w){
+            return l*w;
         }
     }
-    
-    // Nested class for Rectangle with a method to calculate its area
-    public static class Rectangle {
-        // Method to calculate the area of a rectangle given its length and width
-        public static double calcArea(float length, float width) {
-            return length * width; // Formula: length * width
+    public static class Circle{
+        public static double area(float r){
+              return 3.15*r*r;
         }
     }
-
-    // Nested class for Circle with a method to calculate its area
-    public static class Circle {
-        // Method to calculate the area of a circle given its radius
-        public static double calcArea(float radius) {
-            return 3.14 * radius * radius; // Formula: π * radius^2 (using 3.14 as an approximation for π)
-        }
+    public static class Triangle{
+       public static double area(float b,float h){
+            return 0.5*b*h;
+        } 
     }
-
-    // Main method to run the program and get user input
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in); // Create a Scanner object for input
-
-        // Variables to hold dimensions for each shape
-        float length, width, radius, base, height;
-
-        // Prompt user for input and read the base and height for the triangle
-        System.out.println("Enter the dimensions of the triangle: ");
-        base = sc.nextFloat();
-        height = sc.nextFloat();
-
-        // Prompt user for input and read the length and width for the rectangle
-        System.out.println("Enter the dimensions of the rectangle: ");
-        length = sc.nextFloat();
-        width = sc.nextFloat();
-
-        // Prompt user for input and read the radius for the circle
-        System.out.println("Enter the dimension of the circle: ");
-        radius = sc.nextFloat();
-
-        // Display the areas of the shapes
-        System.out.println("The area of the given shapes are: ");
-        System.out.println("Rectangle: " + Rectangle.calcArea(length, width));
-        System.out.println("Triangle: " + Triangle.calcArea(base, height));
-        System.out.println("Circle: " + Circle.calcArea(radius));
-
-        // Close the Scanner object to prevent resource leaks
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int l,w,b,h;
+        float r;
+        System.out.println("enter the dimensions for rectangle");
+        w=sc.nextInt();
+        l=sc.nextInt();
+        System.out.println("enter the dimensions for circle");
+        r=sc.nextFloat();
+        System.out.println("enter the dimensions for triangle");
+        b=sc.nextInt();
+        h=sc.nextInt();
+        System.out.println("the area of given shapes are  :");
+        System.out.println("area of rectangle is" +Rectangle.area(l,w));
+        System.out.println("the area of circle is" +Circle.area(r));
+        System.out.println("the area of triangle is" +Triangle.area(b,h));
+        
         sc.close();
+        
     }
 }
