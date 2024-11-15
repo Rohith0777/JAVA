@@ -1,185 +1,170 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Calculator implements ActionListener {
+class NewCalc implements ActionListener {
+    JFrame f;
+    JTextField t;
+    JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, badd, bdec, bsub, bmul, bclr, bdiv, bequ;
+    static double a = 0, b = 0, result = 0;
+    static int operator = 0;
 
-    // Declare components and variables
-    JFrame frame;  // Frame to hold the calculator
-    JTextField textField;  // Text field to display inputs and results
-    JButton[] numberButtons = new JButton[10];  // Array of buttons for numbers 0-9
-    JButton[] functionButtons = new JButton[8];  // Array for function buttons (+, -, *, /, etc.)
-    JButton addButton, subButton, mulButton, divButton;  // Arithmetic function buttons
-    JButton decButton, equButton, delButton, clrButton;  // Decimal, equals, delete, clear buttons
-    JPanel panel;  // Panel to organize number and function buttons
+    NewCalc() {
+        f = new JFrame("CALCULATOR");
+        t = new JTextField();
+        b1 = new JButton("1");
+        b2 = new JButton("2");
+        b3 = new JButton("3");
+        b4 = new JButton("4");
+        b5 = new JButton("5");
+        b6 = new JButton("6");
+        b7 = new JButton("7");
+        b8 = new JButton("8");
+        b9 = new JButton("9");
+        b0 = new JButton("0");
+        badd = new JButton("+");
+        bsub = new JButton("-");
+        bdiv = new JButton("/");
+        bmul = new JButton("*");
+        bdec = new JButton(".");
+        bequ = new JButton("=");
+        bclr = new JButton("Clear");
 
-    Font myFont = new Font("Ink Free", Font.BOLD, 30);  // Font for buttons and text
+        t.setBounds(40, 40, 270,30);
 
-    // Variables to store inputs and results
-    double num1 = 0, num2 = 0, result = 0;  
-    char operator;  // Stores the current operator (+, -, *, /)
+        b7.setBounds(40, 100, 50, 40);
+        b8.setBounds(110, 100, 50, 40);
+        b9.setBounds(180, 100, 50, 40);
+        bdiv.setBounds(250, 100, 50, 40);
 
-    // Constructor for the Calculator class
-    Calculator() {
-        // Setup frame
-        frame = new JFrame("Calculator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Close operation for frame
-        frame.setSize(420, 550);  // Frame size
-        frame.setLayout(null);  // No layout manager for custom positioning
+        b4.setBounds(40, 170, 50, 40);
+        b5.setBounds(110, 170, 50, 40);
+        b6.setBounds(180, 170, 50, 40);
+        bmul.setBounds(250, 170, 50, 40);
 
-        // Setup text field
-        textField = new JTextField();
-        textField.setBounds(50, 25, 300, 50);  // Position and size of the text field
-        textField.setFont(myFont);  // Set font for text field
-        textField.setEditable(false);  // Make text field non-editable
-        frame.add(textField);  // Add text field to frame
+        b1.setBounds(40, 240, 50, 40);
+        b2.setBounds(110, 240, 50, 40);
+        b3.setBounds(180, 240, 50, 40);
+        bsub.setBounds(250, 240, 50, 40);
 
-        // Initialize function buttons
-        addButton = new JButton("+");
-        subButton = new JButton("-");
-        mulButton = new JButton("*");
-        divButton = new JButton("/");
-        decButton = new JButton(".");
-        equButton = new JButton("=");
-        delButton = new JButton("Del");
-        clrButton = new JButton("Clr");
+        bdec.setBounds(40, 310, 50, 40);
+        b0.setBounds(110, 310, 50, 40);
+        bequ.setBounds(180, 310, 50, 40);
+        badd.setBounds(250, 310, 50, 40);
 
-        // Store function buttons in the array for easy iteration
-        functionButtons[0] = addButton;
-        functionButtons[1] = subButton;
-        functionButtons[2] = mulButton;
-        functionButtons[3] = divButton;
-        functionButtons[4] = decButton;
-        functionButtons[5] = equButton;
-        functionButtons[6] = delButton;
-        functionButtons[7] = clrButton;
+        bclr.setBounds(110, 380, 100, 40);
 
-        // Set properties for function buttons
-        for (int i = 0; i < 8; i++) {
-            functionButtons[i].addActionListener(this);  // Add action listener for button click
-            functionButtons[i].setFont(myFont);  // Set font for buttons
-            functionButtons[i].setFocusable(false);  // Disable focus for buttons
+        f.add(t);
+        f.add(b7);
+        f.add(b8);
+        f.add(b9);
+        f.add(bdiv);
+        f.add(b4);
+        f.add(b5);
+        f.add(b6);
+        f.add(bmul);
+        f.add(b1);
+        f.add(b2);
+        f.add(b3);
+        f.add(bsub);
+        f.add(bdec);
+        f.add(b0);
+        f.add(bequ);
+        f.add(badd);
+        f.add(bclr);
+
+        f.setLayout(null);
+        f.setVisible(true);
+        f.setSize(350, 500);
+        f.setResizable(false);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+        b5.addActionListener(this);
+        b6.addActionListener(this);
+        b7.addActionListener(this);
+        b8.addActionListener(this);
+        b9.addActionListener(this);
+        b0.addActionListener(this);
+        bdiv.addActionListener(this);
+        bmul.addActionListener(this);
+        badd.addActionListener(this);
+        bsub.addActionListener(this);
+        bdec.addActionListener(this);
+        bequ.addActionListener(this);
+        bclr.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b1)
+            t.setText(t.getText().concat("1"));
+        if (e.getSource() == b2)
+            t.setText(t.getText().concat("2"));
+        if (e.getSource() == b3)
+            t.setText(t.getText().concat("3"));
+        if (e.getSource() == b4)
+            t.setText(t.getText().concat("4"));
+        if (e.getSource() == b5)
+            t.setText(t.getText().concat("5"));
+        if (e.getSource() == b6)
+            t.setText(t.getText().concat("6"));
+        if (e.getSource() == b7)
+            t.setText(t.getText().concat("7"));
+        if (e.getSource() == b8)
+            t.setText(t.getText().concat("8"));
+        if (e.getSource() == b9)
+            t.setText(t.getText().concat("9"));
+        if (e.getSource() == b0)
+            t.setText(t.getText().concat("0"));
+        if (e.getSource() == bdec)
+            t.setText(t.getText().concat("."));
+        if (e.getSource() == badd) {
+            a = Double.parseDouble(t.getText());
+            operator = 1;
+            t.setText("");
         }
-
-        // Initialize number buttons 0-9
-        for (int i = 0; i < 10; i++) {
-            numberButtons[i] = new JButton(String.valueOf(i));  // Set button text as the number
-            numberButtons[i].addActionListener(this);  // Add action listener for button click
-            numberButtons[i].setFont(myFont);  // Set font for buttons
-            numberButtons[i].setFocusable(false);  // Disable focus for buttons
+        if (e.getSource() == bsub) {
+            a = Double.parseDouble(t.getText());
+            operator = 2;
+            t.setText("");
         }
-
-        // Set bounds for delete and clear buttons
-        delButton.setBounds(150, 430, 100, 50);
-        clrButton.setBounds(250, 430, 100, 50);
-
-        // Setup panel for number and arithmetic buttons
-        panel = new JPanel();
-        panel.setBounds(50, 100, 300, 300);  // Position and size of the panel
-        panel.setLayout(new GridLayout(4, 4, 10, 10));  // 4x4 grid layout with spacing
-
-        // Add number and arithmetic buttons to the panel
-        panel.add(numberButtons[1]);
-        panel.add(numberButtons[2]);
-        panel.add(numberButtons[3]);
-        panel.add(addButton);
-        panel.add(numberButtons[4]);
-        panel.add(numberButtons[5]);
-        panel.add(numberButtons[6]);
-        panel.add(subButton);
-        panel.add(numberButtons[7]);
-        panel.add(numberButtons[8]);
-        panel.add(numberButtons[9]);
-        panel.add(mulButton);
-        panel.add(decButton);
-        panel.add(numberButtons[0]);
-        panel.add(equButton);
-        panel.add(divButton);
-
-        // Add components to the frame
-        frame.add(panel);
-        frame.add(delButton);
-        frame.add(clrButton);
-
-        frame.setVisible(true);  // Make the frame visible
+        if (e.getSource() == bmul) {
+            a = Double.parseDouble(t.getText());
+            operator = 3;
+            t.setText("");
+        }
+        if (e.getSource() == bdiv) {
+            a = Double.parseDouble(t.getText());
+            operator = 4;
+            t.setText("");
+        }
+        if (e.getSource() == bequ) {
+            b = Double.parseDouble(t.getText());
+            switch (operator) {
+                case 1:
+                    result = a + b;
+                    break;
+                case 2:
+                    result = a - b;
+                    break;
+                case 3:
+                    result = a * b;
+                    break;
+                case 4:
+                    result = a / b;
+                    break;
+                default:
+                    result = 0;
+            }
+            t.setText("" + result);
+        }
+        if (e.getSource() == bclr)
+            t.setText("");
     }
 
     public static void main(String[] args) {
-        // Create an instance of Calculator
-        Calculator calc = new Calculator();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Handle number button clicks
-        for (int i = 0; i < 10; i++) {
-            if (e.getSource() == numberButtons[i]) {
-                textField.setText(textField.getText().concat(String.valueOf(i)));  // Append the number to the text field
-            }
-        }
-        // Handle decimal button click
-        if (e.getSource() == decButton) {
-            textField.setText(textField.getText().concat("."));  // Append a decimal point
-        }
-        // Handle add button click
-        if (e.getSource() == addButton) {
-            num1 = Double.parseDouble(textField.getText());  // Store the first number
-            operator = '+';  // Set the operator
-            textField.setText("");  // Clear the text field
-        }
-        // Handle subtract button click
-        if (e.getSource() == subButton) {
-            num1 = Double.parseDouble(textField.getText());  // Store the first number
-            operator = '-';  // Set the operator
-            textField.setText("");  // Clear the text field
-        }
-        // Handle multiply button click
-        if (e.getSource() == mulButton) {
-            num1 = Double.parseDouble(textField.getText());  // Store the first number
-            operator = '*';  // Set the operator
-            textField.setText("");  // Clear the text field
-        }
-        // Handle divide button click
-        if (e.getSource() == divButton) {
-            num1 = Double.parseDouble(textField.getText());  // Store the first number
-            operator = '/';  // Set the operator
-            textField.setText("");  // Clear the text field
-        }
-        // Handle equals button click
-        if (e.getSource() == equButton) {
-            num2 = Double.parseDouble(textField.getText());  // Store the second number
-
-            // Perform the operation based on the operator
-            switch (operator) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-                case '-':
-                    result = num1 - num2;
-                    break;
-                case '*':
-                    result = num1 * num2;
-                    break;
-                case '/':
-                    result = num1 / num2;
-                    break;
-            }
-            textField.setText(String.valueOf(result));  // Display the result
-            num1 = result;  // Store the result for the next operation
-        }
-        // Handle clear button click
-        if (e.getSource() == clrButton) {
-            textField.setText("");  // Clear the text field
-        }
-        // Handle delete button click
-        if (e.getSource() == delButton) {
-            String string = textField.getText();
-            textField.setText("");
-            // Remove the last character from the text field
-            for (int i = 0; i < string.length() - 1; i++) {
-                textField.setText(textField.getText() + string.charAt(i));
-            }
-        }
+        new NewCalc();
     }
 }
