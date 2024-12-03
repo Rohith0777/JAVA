@@ -1,5 +1,4 @@
-import java.util.Scanner; // Importing Scanner class to take input from the user
-
+import java.util.Scanner; // Importing Scanner class to take input from the user. 
 public class Frequency {  // Declaring a class named Frequency
     public static void main(String[] args) {  // Main method where the execution starts
         Scanner scanner = new Scanner(System.in);  // Creating Scanner object to take input
