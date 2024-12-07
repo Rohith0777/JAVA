@@ -1,5 +1,4 @@
 import java.util.Scanner; 
-
 public class Fib { // Class to calculate and display Fibonacci series
 
     public static void main(String[] args) {
